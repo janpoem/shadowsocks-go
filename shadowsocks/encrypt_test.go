@@ -3,6 +3,8 @@ package shadowsocks
 import (
 	"crypto/rc4"
 	"reflect"
+	"io"
+	"crypto/rand"
 	"testing"
 )
 
@@ -144,11 +146,13 @@ func TestRC4MD5(t *testing.T) {
 }
 
 var cipherKey = make([]byte, 64)
+var cipherIv = make([]byte, 64)
 
 func init() {
 	for i := 0; i < len(cipherKey); i++ {
 		cipherKey[i] = byte(i)
 	}
+	io.ReadFull(rand.Reader, cipherIv)
 }
 
 func BenchmarkRC4Init(b *testing.B) {
@@ -160,9 +164,9 @@ func BenchmarkRC4Init(b *testing.B) {
 
 func benchmarkCipherInit(b *testing.B, ci *cipherInfo) {
 	key := cipherKey[:ci.keyLen]
-	buf := make([]byte, ci.ivLen)
+	iv := cipherIv[:ci.ivLen]
 	for i := 0; i < b.N; i++ {
-		ci.newStream(key, buf, Encrypt)
+		ci.newStream(key, iv, Encrypt)
 	}
 }
 
