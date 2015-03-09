@@ -261,6 +261,11 @@ func BenchmarkDESEncrypt(b *testing.B) {
 	benchmarkCipherEncrypt(b, ci)
 }
 
+func BenchmarkSalsa20Encrypt(b *testing.B) {
+	ci := cipherMethod["salsa20"]
+	benchmarkCipherEncrypt(b, ci)
+}
+
 func benchmarkCipherDecrypt(b *testing.B, ci *cipherInfo) {
 	key := cipherKey[:ci.keyLen]
 	iv := cipherIv[:ci.ivLen]
@@ -311,3 +316,7 @@ func BenchmarkDESDecrypt(b *testing.B) {
 	benchmarkCipherDecrypt(b, ci)
 }
 
+func BenchmarkSalsa20Decrypt(b *testing.B) {
+	ci := cipherMethod["salsa20"]
+	benchmarkCipherDecrypt(b, ci)
+}
