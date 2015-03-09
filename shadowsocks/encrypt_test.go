@@ -145,6 +145,10 @@ func TestRC4MD5(t *testing.T) {
 	testBlockCipher(t, "rc4-md5")
 }
 
+func TestSalsa20(t *testing.T) {
+	testBlockCipher(t, "salsa20")
+}
+
 var cipherKey = make([]byte, 64)
 var cipherIv = make([]byte, 64)
 
@@ -202,5 +206,10 @@ func BenchmarkDESInit(b *testing.B) {
 
 func BenchmarkRC4MD5Init(b *testing.B) {
 	ci := cipherMethod["rc4-md5"]
+	benchmarkCipherInit(b, ci)
+}
+
+func BenchmarkSalsa20Init(b *testing.B) {
+	ci := cipherMethod["salsa20"]
 	benchmarkCipherInit(b, ci)
 }
