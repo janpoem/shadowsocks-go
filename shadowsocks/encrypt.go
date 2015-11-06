@@ -11,9 +11,9 @@ import (
 	"encoding/binary"
 	"errors"
 	"github.com/codahale/chacha20"
-	"golang.org/x/crypto/blowfish"
-	"golang.org/x/crypto/cast5"
-	"golang.org/x/crypto/salsa20/salsa"
+	"github.com/golang/crypto/blowfish"
+	"github.com/golang/crypto/cast5"
+	"github.com/golang/crypto/salsa20/salsa"
 	"io"
 )
 
